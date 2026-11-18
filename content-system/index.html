@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artelligence | منظومة المحتوى اليومي لمدة 3 أشهر (84 يوماً | 336 منشوراً)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0A0A0A;
+      --surface: #121212;
+      --surface-2: #181818;
+      --text: #FAFAFA;
+      --muted: #A1A1AA;
+      --border: rgba(250, 250, 250, 0.14);
+      --accent: #FAFAFA;
+      --accent-text: #0A0A0A;
+    }
+    [data-theme="light"] {
+      --bg: #FAFAFA;
+      --surface: #FFFFFF;
+      --surface-2: #F3F3F1;
+      --text: #0A0A0A;
+      --muted: #52525B;
+      --border: rgba(10, 10, 10, 0.14);
+      --accent: #0A0A0A;
+      --accent-text: #FAFAFA;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cairo', 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.7;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+    html[lang="en"] body {
+      font-family: 'Inter', 'Cairo', system-ui, -apple-system, sans-serif;
+    }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    header {
+      position: sticky; top: 0; z-index: 40;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px; gap: 16px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: 0.08em; font-size: 14px; }
+    .brand svg { width: 28px; height: 26px; }
+    .controls { display: flex; align-items: center; gap: 10px; }
+    .btn {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-family: inherit; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s ease;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn:hover { border-color: var(--text); }
+    .btn-primary {
+      background: var(--accent); color: var(--accent-text); border-color: var(--accent);
+    }
+    .btn-primary:hover { opacity: 0.88; }
+
+    .hero {
+      padding: 72px 0 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 12px; font-weight: 700; color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text); display: inline-block; }
+    h1 {
+      font-size: clamp(28px, 4.5vw, 48px);
+      font-weight: 800; line-height: 1.2; margin-bottom: 18px;
+      max-width: 860px;
+    }
+    .hero p {
+      font-size: 17px; color: var(--muted); max-width: 740px; margin-bottom: 32px;
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px; margin-top: 36px;
+    }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 22px;
+    }
+    .stat-num { font-size: 34px; font-weight: 800; line-height: 1.1; margin-bottom: 6px; }
+    .stat-label { font-size: 13px; color: var(--muted); }
+
+    section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+    .section-title { font-size: 26px; font-weight: 800; margin-bottom: 10px; }
+    .section-sub { color: var(--muted); font-size: 15px; margin-bottom: 32px; max-width: 720px; }
+
+    /* Interactive Steps */
+    .steps-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+    .step-tab {
+      padding: 10px 18px; border-radius: 12px; border: 1px solid var(--border);
+      background: var(--surface); color: var(--muted); cursor: pointer;
+      font-family: inherit; font-size: 14px; font-weight: 700;
+    }
+    .step-tab.active { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+    .step-panel {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; padding: 28px;
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: start;
+    }
+    @media (max-width: 820px) { .step-panel { grid-template-columns: 1fr; } }
+    .step-panel h3 { font-size: 22px; margin-bottom: 12px; }
+    .step-panel p { color: var(--muted); margin-bottom: 16px; }
+    .step-list { list-style: none; display: grid; gap: 10px; }
+    .step-list li {
+      padding: 10px 14px; background: var(--surface-2);
+      border-radius: 10px; font-size: 14px; border: 1px solid var(--border);
+    }
+    .proof-box {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px;
+    }
+    .proof-box h4 { font-size: 13px; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .code-line {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12.5px; padding: 10px 12px; border-radius: 8px;
+      background: var(--bg); border: 1px solid var(--border);
+      margin-bottom: 10px; overflow-x: auto; direction: ltr; text-align: left;
+    }
+
+    /* Live Carousel Previewer */
+    .preview-wrap {
+      display: grid; grid-template-columns: 340px 1fr; gap: 32px; align-items: center;
+    }
+    @media (max-width: 820px) { .preview-wrap { grid-template-columns: 1fr; } }
+    .slide-frame {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden; aspect-ratio: 1080 / 1350;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .slide-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .deck-list { display: grid; gap: 12px; margin-bottom: 20px; }
+    .deck-btn {
+      text-align: inherit; padding: 14px 18px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; font-family: inherit;
+    }
+    .deck-btn.active { border-color: var(--text); background: var(--surface-2); }
+    .deck-btn strong { display: block; font-size: 15px; margin-bottom: 4px; }
+    .deck-btn span { font-size: 13px; color: var(--muted); }
+    .slide-nav { display: flex; align-items: center; gap: 12px; }
+
+    /* Cadence Matrix */
+    .cadence-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+    .day-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px;
+    }
+    .day-card h4 { font-size: 15px; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .slot-pill {
+      font-size: 12px; padding: 6px 8px; border-radius: 8px;
+      background: var(--surface-2); border: 1px solid var(--border);
+      margin-bottom: 6px;
+    }
+
+    footer { padding: 48px 0; text-align: center; color: var(--muted); font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <svg viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="23" cy="79" r="13.5" fill="currentColor"/>
+          <path d="M55.5 14.5 C57.2 11.4 59.8 11.4 61.5 14.5 L94.2 76.2 C98.5 84.3 103.5 89.2 110 91.5 L110 92.8 L83.5 92.8 C74.5 92.8 68.8 89.0 64.5 81.0 L40.2 35.8 C38.5 32.6 38.8 29.8 41.2 26.2 Z" fill="currentColor"/>
+        </svg>
+        <span>ARTELLIGENCE</span>
+      </div>
+      <div class="controls">
+        <button class="btn" id="themeBtn" type="button">Gallery Light</button>
+        <button class="btn" id="langBtn" type="button">English</button>
+        <a class="btn btn-primary" href="../campaign/" data-ar="احجز مكالمة استكشاف" data-en="Book Discovery Call">احجز مكالمة استكشاف</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="badge"><span class="dot"></span><span data-ar="دراسة حالة حية | نظام المحتوى والأتمتة لمدة 3 أشهر" data-en="Live Case Study | 3-Month Autonomous Content System">دراسة حالة حية | نظام المحتوى والأتمتة لمدة 3 أشهر</span></div>
+      <h1 data-ar="كيف بنينا منظومة نشر يومية لمدة 3 أشهر (84 يوماً | 336 منشوراً) من تجاربنا الحقيقية فقط" data-en="How We Built an 84-Day Daily Content Engine (336 Scheduled Posts) Strictly From Real Systems">كيف بنينا منظومة نشر يومية لمدة 3 أشهر (84 يوماً | 336 منشوراً) من تجاربنا الحقيقية فقط</h1>
+      <p data-ar="بدون وعود تسويقية فارغة: توثيق كامل للرحلة الهندسية من جرد 11 نظاماً حقيقياً، إلى تصميم 180 عرض كاروسيل، وتشغيل محرك نشر محلي يعمل تلقائياً في الخلفية." data-en="Zero marketing fluff: full engineering walkthrough from auditing 11 real systems, to rendering 180 carousel decks, to running an autonomous local publishing daemon.">بدون وعود تسويقية فارغة: توثيق كامل للرحلة الهندسية من جرد 11 نظاماً حقيقياً، إلى تصميم 180 عرض كاروسيل، وتشغيل محرك نشر محلي يعمل تلقائياً في الخلفية.</p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">84</div>
+          <div class="stat-label" data-ar="يوماً متصلاً بدون انقطاع (2026-11-22 إلى 2027-02-13)" data-en="Consecutive Days (2026-11-22 to 2027-02-13)">يوماً متصلاً بدون انقطاع (2026-11-22 إلى 2027-02-13)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">336</div>
+          <div class="stat-label" data-ar="منشوراً مجدولاً (168 LinkedIn + 84 IG + 84 FB)" data-en="Scheduled Posts (168 LinkedIn + 84 IG + 84 FB)">منشوراً مجدولاً (168 LinkedIn + 84 IG + 84 FB)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1,440</div>
+          <div class="stat-label" data-ar="شريحة PNG بمقاس 1080x1350 + 180 ملف PDF" data-en="1080x1350 PNG Slides + 180 8-Page PDFs">شريحة PNG بمقاس 1080x1350 + 180 ملف PDF</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">0</div>
+          <div class="stat-label" data-ar="أرقام غير موثقة أو أخطاء تنسيق في 204 ملفاً" data-en="Unverified Claims or Format Errors Across 204 Files">أرقام غير موثقة أو أخطاء تنسيق في 204 ملفاً</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title" data-ar="كيف مشينا خطوة بخطوة؟ (4 مراحل تنفيذية)" data-en="How We Executed Step by Step (4 Stages)">كيف مشينا خطوة بخطوة؟ (4 مراحل تنفيذية)</h2>
+      <p class="section-sub" data-ar="اضغط على أي مرحلة لاستعراض ما تم بناؤه والأدلة التقنية الخاصة بها." data-en="Select any stage to inspect the workflow and its engineering proof.">اضغط على أي مرحلة لاستعراض ما تم بناؤه والأدلة التقنية الخاصة بها.</p>
+
+      <div class="steps-tabs" id="stepsTabs"></div>
+      <div class="step-panel" id="stepPanel"></div>
+    </section>
+
+    <section>
+      <h2 class="section-title" data-ar="معاينة حية للشرائح المصممة (1080x1350)" data-en="Live Rendered Carousel Preview (1080x1350)">معاينة حية للشرائح المصممة (1080x1350)</h2>
+      <p class="section-sub" data-ar="نماذج فعلية من الشرائح المستضافة على GitHub والتي ينشرها المحرك تلقائياً." data-en="Actual rendered slides hosted on GitHub and published automatically by our engine.">نماذج فعلية من الشرائح المستضافة على GitHub والتي ينشرها المحرك تلقائياً.</p>
+
+      <div class="preview-wrap">
+        <div class="slide-frame">
+          <img id="slideImg" src="../assets/social-carousels/IGFB-W1-C1_AR/01.png" alt="Artelligence Carousel Slide" />
+        </div>
+        <div>
+          <div class="deck-list" id="deckList"></div>
+          <div class="slide-nav">
+            <button class="btn" id="prevSlide" type="button" data-ar="السابق" data-en="Prev">السابق</button>
+            <span id="slideCounter" style="font-weight:700; font-size:14px;">01 / 08</span>
+            <button class="btn" id="nextSlide" type="button" data-ar="التالي" data-en="Next">التالي</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title" data-ar="الإيقاع اليومي الكامل (4 منشورات كل يوم)" data-en="Full 7-Day Daily Cadence (4 Posts Every Day)">الإيقاع اليومي الكامل (4 منشورات كل يوم)</h2>
+      <p class="section-sub" data-ar="توزيع ثابت بتوقيت القاهرة طوال الـ 12 أسبوعاً بدون يوم فراغ واحد." data-en="Consistent Cairo-time publishing cadence across all 12 weeks with zero gap days.">توزيع ثابت بتوقيت القاهرة طوال الـ 12 أسبوعاً بدون يوم فراغ واحد.</p>
+      <div class="cadence-grid" id="cadenceGrid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p data-ar="أحمد عصام رمضان | Artelligence - مبني وموثق بالكامل من أنظمة حقيقية" data-en="Ahmed Issam Ramadan | Artelligence - Built & Verified From Live Systems">أحمد عصام رمضان | Artelligence - مبني وموثق بالكامل من أنظمة حقيقية</p>
+    </div>
+  </footer>
+
+  <script>
+    const STAGES = [
+      {
+        tabAr: "1. الجرد الموثق", tabEn: "1. Verified Audit",
+        titleAr: "المرحلة 1: جرد 7 مصادر و 11 نظاماً حقيقياً",
+        titleEn: "Stage 1: Auditing 7 Sources & 11 Live Systems",
+        descAr: "قبل كتابة أي منشور، قمنا بجرد الملفات المحلية، Google Drive، محادثات Manus و Gemini، والمواقع الحية لاستخراج الأرقام المؤكدة فقط.",
+        descEn: "Before writing a single post, we audited local repos, Google Drive, Manus/Gemini logs, and live websites to keep only verified metrics.",
+        itemsAr: [
+          "حذف أي نسبة تخمينية غير مقاسة (مثل +110%) والاعتماد على أصول فعلية (92 ريل، 6 مواقع Tohamy House).",
+          "توثيق سطر المصدر الداخلي لكل ادعاء قبل السماح بدخوله مرحلة الإنتاج.",
+          "مطابقة الأسعار المعلنة بين Playbook v1.1 والموقع الحي بدون أي تغيير."
+        ],
+        itemsEn: [
+          "Removed unmeasured percentage guesses (+110%) in favor of real assets (92 reels, 6 Tohamy House sites).",
+          "Attached an internal source line to every claim before production.",
+          "Synced public price bands between Playbook v1.1 and the live site."
+        ],
+        proofAr: ["Stage_1_Verified_Inventory.md (11 نظاماً موثقاً)", "OVERLAP_AUDIT.md (5 إصلاحات قبل الإطلاق)"],
+        proofEn: ["Stage_1_Verified_Inventory.md (11 verified systems)", "OVERLAP_AUDIT.md (5 pre-launch fixes)"]
+      },
+      {
+        tabAr: "2. الاستراتيجية والسلاسل", tabEn: "2. Strategy & Series",
+        titleAr: "المرحلة 2: 5 محاور و 6 سلاسل متتابعة (168 وحدة)",
+        titleEn: "Stage 2: 5 Pillars & 6 Sequential Series (168 Units)",
+        descAr: "تحويل الأنظمة الـ 11 إلى 6 سلاسل تعليمية مترابطة تغطي 12 أسبوعاً، بحيث يعلم كل منشور خطوة تطبيقية واضحة.",
+        descEn: "Mapped all 11 systems into 6 sequential series spanning 12 weeks so every post teaches an actionable step.",
+        itemsAr: [
+          "LinkedIn: 48 كاروسيل (AR + EN) + 36 منشور نصي (AR + EN) = 168 منشوراً.",
+          "Instagram & Facebook: 84 كاروسيل عربي مكيّف بالمساحة الآمنة 150px.",
+          "ربط الكاروسيلات بأتمتة SuperProfile Auto-DM بكلمة ai."
+        ],
+        itemsEn: [
+          "LinkedIn: 48 Carousels (AR+EN) + 36 Text Posts (AR+EN) = 168 posts.",
+          "Instagram & Facebook: 84 Arabic Carousels with 150px safe zones.",
+          "Connected IG carousels to live SuperProfile Auto-DM keyword 'ai'."
+        ],
+        proofAr: ["Stage_2_Content_Strategy_3Months.md", "3Month_Content_Calendar.xlsx (168 وحدة)"],
+        proofEn: ["Stage_2_Content_Strategy_3Months.md", "3Month_Content_Calendar.xlsx (168 units)"]
+      },
+      {
+        tabAr: "3. الإنتاج والتصميم الآلي", tabEn: "3. Automated Rendering",
+        titleAr: "المرحلة 3: توليد 180 عرضاً (1,440 شريحة PNG + 180 PDF)",
+        titleEn: "Stage 3: Rendering 180 Decks (1,440 PNGs + 180 PDFs)",
+        descAr: "بناء محرك توليد برمجي عبر Playwright و Chrome يلتزم بهوية Artelligence المونوكروم ويمنع تجاوز 25 كلمة للشريحة.",
+        descEn: "Built a deterministic Playwright + Chrome renderer enforcing Artelligence monochrome identity and <= 25 words per slide.",
+        itemsAr: [
+          "1080x1350 PNG لكل شريحة + ملف PDF من 8 صفحات جاهز للرفع.",
+          "فحص آلي عبر verify_deliverables.py يؤكد حد أقصى 25/25 كلمة.",
+          "صفر شرطة طويلة (U+2014) عبر 204 ملفات ومصنفات."
+        ],
+        itemsEn: [
+          "1080x1350 PNG per slide + 8-page upload-ready PDF per deck.",
+          "Automated verify_deliverables.py confirming <= 25/25 words.",
+          "Zero U+2014 em dashes across all 204 files and workbooks."
+        ],
+        proofAr: ["build_daily_expansion.py -> exit code 0", "verify_deliverables.py -> 1,440 PNGs verified"],
+        proofEn: ["build_daily_expansion.py -> exit code 0", "verify_deliverables.py -> 1,440 PNGs verified"]
+      },
+      {
+        tabAr: "4. المحرك المحلي والأتمتة", tabEn: "4. Local Daemon & APIs",
+        titleAr: "المرحلة 4: جدولة 336 منشوراً وتشغيل LaunchAgent",
+        titleEn: "Stage 4: Scheduling 336 Posts & LaunchAgent Daemon",
+        descAr: "بدلاً من قيود منصات الجدولة المدفوعة، طوّرنا محرك social-hub المحلي ليرفع الشرائح مباشرة عبر LinkedIn و Meta Graph API v21.0.",
+        descEn: "Instead of paid SaaS limits, we upgraded our local social-hub engine to upload multi-slide carousels via LinkedIn & Meta Graph API v21.0.",
+        itemsAr: [
+          "حفظ 336 موعداً في social_hub.sqlite مع حجز ذري يمنع التكرار.",
+          "استضافة 672 صورة IG على GitHub مع استجابة HTTP 200 موثقة.",
+          "تشغيل خدمة macOS LaunchAgent تفحص المواعيد كل 60 ثانية."
+        ],
+        itemsEn: [
+          "Stored 336 slots in social_hub.sqlite with atomic locking.",
+          "Hosted 672 IG PNGs on GitHub verified with HTTP 200.",
+          "Active macOS LaunchAgent polling due posts every 60 seconds."
+        ],
+        proofAr: ["launchctl: com.artelligence.social-hub-scheduler (PID active)", "HTTP 200 on 672 public IG slide URLs"],
+        proofEn: ["launchctl: com.artelligence.social-hub-scheduler (PID active)", "HTTP 200 on 672 public IG slide URLs"]
+      }
+    ];
+
+    const DECKS = [
+      { id: "IGFB-W1-C1_AR", ar: "الأسبوع 1: 5 فواتير مخفية في الذكاء الاصطناعي", en: "Week 1: 5 Hidden AI Operating Costs" },
+      { id: "IGFB-W4-C4_AR", ar: "الأسبوع 4: لا تفتح الشاشات كل ساعة لتطمئن (Telegram Hub)", en: "Week 4: Real-Time Telegram Control Hub" },
+      { id: "IGFB-W12-C7_AR", ar: "الأسبوع 12: حصاد 84 يوماً يومياً (المهمة #1)", en: "Week 12: 84-Day Harvest & Next Step CTA" }
+    ];
+
+    const CADENCE = [
+      { dayAr: "الأحد", dayEn: "Sunday", slots: ["10:00 LI Carousel AR", "14:00 LI Carousel EN", "19:00 IG Carousel", "19:05 FB Carousel"] },
+      { dayAr: "الإثنين", dayEn: "Monday", slots: ["11:00 LI Text AR", "15:00 LI Text EN", "19:00 IG Carousel", "19:05 FB Carousel"] },
+      { dayAr: "الثلاثاء", dayEn: "Tuesday", slots: ["10:00 LI Carousel AR", "14:00 LI Carousel EN", "19:00 IG Carousel", "19:05 FB Carousel"] },
+      { dayAr: "الأربعاء", dayEn: "Wednesday", slots: ["11:00 LI Text AR", "15:00 LI Text EN", "19:00 IG Carousel", "19:05 FB Carousel"] },
+      { dayAr: "الخميس", dayEn: "Thursday", slots: ["10:00 LI Carousel AR", "14:00 LI Carousel EN", "19:00 IG Carousel", "19:05 FB Carousel"] },
+      { dayAr: "الجمعة", dayEn: "Friday", slots: ["10:00 LI Carousel AR", "14:00 LI Carousel EN", "19:00 IG Carousel", "19:05 FB Carousel"] },
+      { dayAr: "السبت", dayEn: "Saturday", slots: ["11:00 LI Text AR", "15:00 LI Text EN", "19:00 IG Carousel", "19:05 FB Carousel"] }
+    ];
+
+    let lang = "ar";
+    let activeStage = 0;
+    let activeDeck = 0;
+    let activeSlide = 1;
+
+    function renderStages() {
+      const tabs = document.getElementById("stepsTabs");
+      const panel = document.getElementById("stepPanel");
+      tabs.innerHTML = STAGES.map((s, idx) =>
+        `<button class="step-tab ${idx === activeStage ? "active" : ""}" onclick="setStage(${idx})">${lang === "ar" ? s.tabAr : s.tabEn}</button>`
+      ).join("");
+      const st = STAGES[activeStage];
+      const items = lang === "ar" ? st.itemsAr : st.itemsEn;
+      const proofs = lang === "ar" ? st.proofAr : st.proofEn;
+      panel.innerHTML = `
+        <div>
+          <h3>${lang === "ar" ? st.titleAr : st.titleEn}</h3>
+          <p>${lang === "ar" ? st.descAr : st.descEn}</p>
+          <ul class="step-list">${items.map(i => `<li>${i}</li>`).join("")}</ul>
+        </div>
+        <div class="proof-box">
+          <h4>${lang === "ar" ? "الأدلة والملفات الموثقة" : "Verified Artifacts & Proof"}</h4>
+          ${proofs.map(p => `<div class="code-line">${p}</div>`).join("")}
+        </div>
+      `;
+    }
+
+    function renderDecks() {
+      const list = document.getElementById("deckList");
+      list.innerHTML = DECKS.map((d, idx) => `
+        <button class="deck-btn ${idx === activeDeck ? "active" : ""}" onclick="setDeck(${idx})">
+          <strong>${lang === "ar" ? d.ar : d.en}</strong>
+          <span>${d.id} (01.png .. 08.png)</span>
+        </button>
+      `).join("");
+      const pad = String(activeSlide).padStart(2, "0");
+      document.getElementById("slideImg").src = `../assets/social-carousels/${DECKS[activeDeck].id}/${pad}.png`;
+      document.getElementById("slideCounter").textContent = `${pad} / 08`;
+    }
+
+    function renderCadence() {
+      const grid = document.getElementById("cadenceGrid");
+      grid.innerHTML = CADENCE.map(c => `
+        <div class="day-card">
+          <h4>${lang === "ar" ? c.dayAr : c.dayEn}</h4>
+          ${c.slots.map(s => `<div class="slot-pill">${s}</div>`).join("")}
+        </div>
+      `).join("");
+    }
+
+    function applyLang() {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+      document.getElementById("langBtn").textContent = lang === "ar" ? "English" : "العربية";
+      document.querySelectorAll("[data-ar]").forEach(el => {
+        el.textContent = el.getAttribute(`data-${lang}`);
+      });
+      renderStages();
+      renderDecks();
+      renderCadence();
+    }
+
+    window.setStage = (idx) => { activeStage = idx; renderStages(); };
+    window.setDeck = (idx) => { activeDeck = idx; activeSlide = 1; renderDecks(); };
+    document.getElementById("prevSlide").onclick = () => { activeSlide = activeSlide > 1 ? activeSlide - 1 : 8; renderDecks(); };
+    document.getElementById("nextSlide").onclick = () => { activeSlide = activeSlide < 8 ? activeSlide + 1 : 1; renderDecks(); };
+    document.getElementById("langBtn").onclick = () => { lang = lang === "ar" ? "en" : "ar"; applyLang(); };
+    document.getElementById("themeBtn").onclick = () => {
+      const cur = document.documentElement.getAttribute("data-theme");
+      const nxt = cur === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", nxt);
+      document.getElementById("themeBtn").textContent = nxt === "dark" ? "Gallery Light" : "Obsidian Dark";
+    };
+
+    applyLang();
+  </script>
+</body>
+</html>
