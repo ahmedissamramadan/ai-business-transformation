@@ -237,9 +237,10 @@
         <span>ARTELLIGENCE</span>
       </div>
       <div class="controls">
+        <button class="btn" id="shareBtn" type="button" data-ar="مشاركة الرابط" data-en="Share Link">مشاركة الرابط</button>
         <button class="btn" id="themeBtn" type="button">Obsidian Dark</button>
         <button class="btn" id="langBtn" type="button">English</button>
-        <a class="btn btn-primary" href="../campaign/" data-ar="احجز مكالمة استكشاف" data-en="Book Discovery Call">احجز مكالمة استكشاف</a>
+        <a class="btn btn-primary" href="../campaign/?utm_source=content_system&utm_medium=header_cta" data-ar="احجز مكالمة استكشاف" data-en="Book Discovery Call">احجز مكالمة استكشاف</a>
       </div>
     </div>
   </header>
@@ -348,7 +349,7 @@
   <div class="sticky-cta" id="stickyCta" role="region" aria-label="Discovery Call">
     <div class="sticky-cta-text" data-ar="تريد بناء منظومة محتوى أو أتمتة مشابهة لشركتك؟ احجز مكالمة استكشاف مجانية (20-30 دقيقة)." data-en="Want a similar content or automation system for your business? Book a free 20-30m discovery call.">تريد بناء منظومة محتوى أو أتمتة مشابهة لشركتك؟ احجز مكالمة استكشاف مجانية (20-30 دقيقة).</div>
     <div class="sticky-cta-actions">
-      <a class="btn-inv" href="../campaign/" data-ar="احجز الآن" data-en="Book Now">احجز الآن</a>
+      <a class="btn-inv" href="../campaign/?utm_source=content_system&utm_medium=sticky_cta" data-ar="احجز الآن" data-en="Book Now">احجز الآن</a>
       <button class="btn-close" id="closeSticky" type="button" aria-label="Close">×</button>
     </div>
   </div>
@@ -547,6 +548,16 @@
       const nxt = cur === "light" ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", nxt);
       document.getElementById("themeBtn").textContent = nxt === "light" ? "Obsidian Dark" : "Gallery Light";
+    };
+
+    document.getElementById("shareBtn").onclick = async () => {
+      const url = window.location.href;
+      try {
+        await navigator.clipboard.writeText(url);
+        const btn = document.getElementById("shareBtn");
+        btn.textContent = lang === "ar" ? "تم النسخ ✓" : "Copied ✓";
+        setTimeout(() => { btn.textContent = lang === "ar" ? "مشاركة الرابط" : "Share Link"; }, 1800);
+      } catch (_) {}
     };
 
     document.getElementById("closeSticky").onclick = () => {
