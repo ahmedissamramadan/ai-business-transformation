@@ -6,9 +6,11 @@
   const isEn = (document.documentElement.lang || "ar").toLowerCase().startsWith("en");
 
   const LINKS = [
+    { key: "portfolio", labelAr: "البورتفوليو", labelEn: "Portfolio", href: "https://ahmedissamramadan.github.io/portfolio/" },
     { key: "artelligence", labelAr: "Artelligence", labelEn: "Artelligence", href: "https://ahmedissamramadan.github.io/artelligence/" },
     { key: "artelligence-os", labelAr: "Artelligence OS", labelEn: "Artelligence OS", href: "https://ahmedissamramadan.github.io/Artelligence-OS/" },
     { key: "ai-pyramid", labelAr: "هرم الـ AI", labelEn: "AI Pyramid", href: "https://ahmedissamramadan.github.io/ai-pyramid/" },
+    { key: "air", labelAr: "حاسبة الجاهزية", labelEn: "AIR Calculator", href: "https://ahmedissamramadan.github.io/air/" },
     { key: "transformation", labelAr: "تحوّل الأعمال", labelEn: "Transformation", href: "https://ahmedissamramadan.github.io/ai-business-transformation/" },
     { key: "content-system", labelAr: "منظومة 84 يوماً", labelEn: "84-Day System", href: "https://ahmedissamramadan.github.io/ai-business-transformation/content-system/" },
     { key: "wasl", labelAr: "WASL Network", labelEn: "WASL Network", href: "https://wasl-network.com" },
@@ -16,6 +18,7 @@
   ];
 
   const currentUrl = window.location.href.toLowerCase();
+  const currentPath = window.location.pathname.toLowerCase();
 
   const style = document.createElement("style");
   style.textContent = `
@@ -120,6 +123,11 @@
     if (item.cta) {
       a.className = "eco-cta";
     } else if (
+      (item.key === "portfolio" && currentPath.startsWith("/portfolio")) ||
+      (item.key === "artelligence" && currentPath.startsWith("/artelligence/")) ||
+      (item.key === "artelligence-os" && currentPath.startsWith("/artelligence-os")) ||
+      (item.key === "ai-pyramid" && currentPath.startsWith("/ai-pyramid")) ||
+      (item.key === "air" && currentPath.startsWith("/air")) ||
       (item.key === "content-system" && currentUrl.includes("/content-system")) ||
       (item.key === "transformation" && currentUrl.includes("/ai-business-transformation") && !currentUrl.includes("/content-system") && !currentUrl.includes("/campaign"))
     ) {
